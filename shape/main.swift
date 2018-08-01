@@ -34,24 +34,37 @@ class Shape2D: Shape {
 }
 
 
+class Shape3D: Shape {
+    func volume() -> Double { //thể tích của hình 3 chiều
+        return 0.0
+    }
+    
+    override func area() -> Double { // diện tích mặt của hình 3 chiều
+        return 0.0
+    }
+}
 
+////////////////2D///////////////
 final class Circle: Shape2D {
     var radius: Double
     init(radius: Double) {
         self.radius = radius
-        
-        func perimeter() -> Double {
+    }
+        override func perimeter() -> Double {
             return 2 * pi * radius
         }
-        print("\nchu vi hinh tron la: \(perimeter())")
         
-        func area() -> Double {
+        override func area() -> Double {
             return pi * radius * radius
         }
-        print("dien tich hinh tron la: \(area())\n")
+    
+    func display(){
+         print("chu vi hinh tron la: \(perimeter())")
+         print("dien tich hinh tron la: \(area())\n")
     }
 }
 let setCircle = Circle(radius: 9)
+setCircle.display()
 
 
 
@@ -60,19 +73,21 @@ final class Square: Shape2D{
     var edge: Double
     init(edge: Double) {
         self.edge = edge
-    
-    func perimeter() -> Double {
+    }
+    override func perimeter() -> Double {
             return edge * 4
     }
-    print("chu vi hinh vuong la: \(perimeter())")
-    
-    func area() -> Double {
+    override func area() -> Double {
         return edge * edge
     }
-    print("dien tich hinh vuong la: \(area())\n")
+    
+    func display(){
+        print("chu vi hinh vuong la: \(perimeter())")
+        print("dien tich hinh vuong la: \(area())\n")
     }
  }
  let setSquare = Square(edge: 4)
+setSquare.display()
 
 
 
@@ -87,67 +102,65 @@ final class Square: Shape2D{
         self.edgeB = edgeB
         self.edgeC = edgeC // canh huyen
         self.height = height // chieu cao
-    func perimeter() -> Double {
+    }
+    override func perimeter() -> Double {
         return edgeA + edgeB + edgeC
     }
-     print("\nchu vi hinh tam giac la: \(perimeter())")
-    func area() -> Double {
+    override func area() -> Double {
         return 0.5 * (height * edgeC)
     }
-        print("dien tich hinh tam giac la: \(area())")
-    }
- }
-let setTriangle = Triangle(edgeA: 2, edgeB: 5, edgeC: 6, height: 6)
-
-
-class Shape3D: Shape {
-    func volume() -> Double { //thể tích
-        return 0.0
+    func display(){
+        print("chu vi hinh tam giac la: \(perimeter())")
+        print("dien tich hinh tam giac la: \(area())\n")
     }
     
-    override func area() -> Double {
-        return 0.0
-    }
-}
+ }
+let setTriangle = Triangle(edgeA: 2, edgeB: 5, edgeC: 6, height: 6)
+setCircle.display()
 
+
+
+
+///////////3D///////////////////////
 
  final class Globular: Shape3D{
     var radius: Double
     init(radius: Double){
         self.radius = radius
-        func volume() -> Double {
+    }
+        override func volume() -> Double {
             return 4/3 * pi * radius * radius * radius
         }
-        print("\nthe tich  hinh cau la: \(volume())")
-        
-        func area() -> Double { // diệntisch mặt cầu
-            return 4 * pi * radius * radius
+       override func area() -> Double { // diện tich mặt cầu
+            return round( 4 * pi * radius * radius)
         }
-        print("dien tich be mat  hinh cau la: \(volume())")
- 
+    
+    func display(){
+        print("the tich hinh cau la: \(volume())")
+        print("dien tich mặt cầu la: \(area())\n")
     }
  }
  let setGlobular = Globular(radius: 4)
- 
+ setGlobular.display()
 
  final class Cube: Shape3D{
  var edge: Double
  init(edge: Double){
- self.edge = edge
-    
-    func volume() -> Double {
+    self.edge = edge
+ }
+  override  func volume() -> Double {
         return edge * edge * edge
     }
-    print("\nthe tich hinh lap phuong: \(volume())")
-    
-    
-    func area() -> Double { // diện tích bề mặt hình lập phương
+  override  func area() -> Double { // diện tích bề mặt hình lập phương
         return 6 * edge * edge
     }
-    print("dien tich hinh be mat lap phuong: \(area())")
- }
+    func display(){
+        print("the tich hinh lap phuong: \(volume())")
+        print("dien tich mặt hinh lap phuong la: \(area())\n")
+    }
  }
  let setCube = Cube(edge: 5.5)
+setCube.display()
  
 
 
