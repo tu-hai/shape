@@ -7,7 +7,6 @@
 //
 
 import Foundation
-//import UIKit
 
 let pi = 3.14  // hằng số pi khai báo toàn cục
 print("số pi = \(pi)")
@@ -74,9 +73,11 @@ final class Square: Shape2D{
     init(edge: Double) {
         self.edge = edge
     }
+    
     override func perimeter() -> Double {
             return edge * 4
     }
+    
     override func area() -> Double {
         return edge * edge
     }
@@ -87,7 +88,7 @@ final class Square: Shape2D{
     }
  }
  let setSquare = Square(edge: 4)
-setSquare.display()
+ setSquare.display()
 
 
 
@@ -143,6 +144,7 @@ setCircle.display()
  let setGlobular = Globular(radius: 4)
  setGlobular.display()
 
+
  final class Cube: Shape3D{
  var edge: Double
  init(edge: Double){
@@ -161,7 +163,26 @@ setCircle.display()
  }
  let setCube = Cube(edge: 5.5)
 setCube.display()
- 
 
 
+
+///////// Require 2 /////////// Require 2 ///////// Require 2 //////////// Require 2 ////////////
+
+class Require2 {
+
+    func GetT() -> Int32 {
+        var  T: Int32 =  Int32(arc4random_uniform(27) + 69)
+        return T
+    }
+    func GetR() -> Int32 {
+        let  R: Int32 = T % 5
+        return R
+    }
+    func display() {
+        print(T)
+        print(R)
+    }
+}
+let setRequire2 = Require2()
+setCube.display()
 
