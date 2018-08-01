@@ -43,7 +43,7 @@ final class Circle: Shape2D {
         func perimeter() -> Double {
             return 2 * pi * radius
         }
-        print("\ndien tich hinh tron la: \(perimeter())")
+        print("\nchu vi hinh tron la: \(perimeter())")
         
         func area() -> Double {
             return pi * radius * radius
@@ -123,7 +123,7 @@ class Shape3D: Shape {
         func area() -> Double { // diệntisch mặt cầu
             return 4 * pi * radius * radius
         }
-        print("the tich  hinh cau la: \(volume())")
+        print("dien tich be mat  hinh cau la: \(volume())")
  
     }
  }
