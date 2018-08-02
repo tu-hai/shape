@@ -131,17 +131,23 @@ class Cube: Shape3D{
 
 
 
-
 class RandomCreateShapes {
+    
     var  intT: Int32 =  Int32(arc4random_uniform(27) + 69) // số nguyên T bất kỳ từ 69 - 96
     
-    func SurPlusR() -> Int32 {
-        let  surPlusR: Int32 = intT % 5                   // R số dư của T chia 5
-        return surPlusR
+    func AddShapesToList()  {
+        var listShapes = [Any]()  // mảng danh sách chứa các loại hình
         
-    }
-    
-    var listShapes: Array<Int> = Array()
+        let  surPlusR: Int32 = intT % 5                   // R số dư khi T chia 5
+        
+        if (surPlusR == 0){
+            
+        }
+        if (surPlusR == 1){
+            
+        }
+        
+        }
 }
 
 
