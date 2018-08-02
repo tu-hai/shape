@@ -9,7 +9,6 @@
 import Foundation
 
 let pi = 3.14  // hằng số pi khai báo toàn cục
-print("số pi = \(pi)")
 
 class Shape {
     func perimeter() -> Double {
@@ -37,14 +36,11 @@ class Shape3D: Shape {
     func volume() -> Double { //thể tích của hình 3 chiều
         return 0.0
     }
-    
-    override func area() -> Double { // diện tích mặt của hình 3 chiều
-        return 0.0
-    }
 }
 
+
 ////////////////2D///////////////
-final class Circle: Shape2D {
+class Circle: Shape2D {
     var radius: Double
     init(radius: Double) {
         self.radius = radius
@@ -56,19 +52,10 @@ final class Circle: Shape2D {
         override func area() -> Double {
             return pi * radius * radius
         }
-    
-    func display(){
-         print("chu vi hinh tron la: \(perimeter())")
-         print("dien tich hinh tron la: \(area())\n")
-    }
 }
-let setCircle = Circle(radius: 9)
-setCircle.display()
 
 
-
-
-final class Square: Shape2D{
+class Square: Shape2D{
     var edge: Double
     init(edge: Double) {
         self.edge = edge
@@ -82,100 +69,79 @@ final class Square: Shape2D{
         return edge * edge
     }
     
-    func display(){
-        print("chu vi hinh vuong la: \(perimeter())")
-        print("dien tich hinh vuong la: \(area())\n")
-    }
  }
- let setSquare = Square(edge: 4)
- setSquare.display()
 
 
-
- 
- final class Triangle: Shape2D{
+class Triangle: Shape2D{
     var edgeA: Double
     var edgeB: Double
     var edgeC: Double
-    var height: Double
-    init(edgeA: Double, edgeB: Double, edgeC: Double, height: Double) {
+    init(edgeA: Double, edgeB: Double, edgeC: Double) {
         self.edgeA = edgeA
         self.edgeB = edgeB
-        self.edgeC = edgeC // canh huyen
-        self.height = height // chieu cao
+        self.edgeC = edgeC
     }
     override func perimeter() -> Double {
-        return edgeA + edgeB + edgeC
+        if edgeA + edgeB > edgeC && edgeC + edgeB > edgeA && edgeC + edgeA > edgeB {
+            return edgeC + edgeB + edgeA
+        }
+        else{
+            print("khong phai 3 canh cua 1 tam giac")
+            return 0.0
+        }
     }
+    
     override func area() -> Double {
-        return 0.5 * (height * edgeC)
-    }
-    func display(){
-        print("chu vi hinh tam giac la: \(perimeter())")
-        print("dien tich hinh tam giac la: \(area())\n")
+        let  halfPerimeter: Double = perimeter() * 0.5 // dùng 1 nữa chu vi để tính diện tích
+        return sqrt(halfPerimeter * (halfPerimeter - edgeA) * (halfPerimeter - edgeB) * (halfPerimeter - edgeC))
+        // công thức heron dùng 1 nữa chu vi và 3 cạnh để tính S tam giác
     }
     
  }
-let setTriangle = Triangle(edgeA: 2, edgeB: 5, edgeC: 6, height: 6)
-setCircle.display()
-
-
 
 
 ///////////3D///////////////////////
-
- final class Globular: Shape3D{
+class Globular: Shape3D{
     var radius: Double
     init(radius: Double){
         self.radius = radius
     }
-        override func volume() -> Double {
+       override func volume() -> Double {
             return 4/3 * pi * radius * radius * radius
         }
        override func area() -> Double { // diện tich mặt cầu
             return round( 4 * pi * radius * radius)
         }
-    
-    func display(){
-        print("the tich hinh cau la: \(volume())")
-        print("dien tich mặt cầu la: \(area())\n")
-    }
- }
- let setGlobular = Globular(radius: 4)
- setGlobular.display()
+
+  }
 
 
- final class Cube: Shape3D{
- var edge: Double
- init(edge: Double){
-    self.edge = edge
- }
-  override  func volume() -> Double {
-        return edge * edge * edge
-    }
-  override  func area() -> Double { // diện tích bề mặt hình lập phương
-        return 6 * edge * edge
-    }
-    func display(){
-        print("the tich hinh lap phuong: \(volume())")
-        print("dien tich mặt hinh lap phuong la: \(area())\n")
-    }
- }
- let setCube = Cube(edge: 5.5)
-setCube.display()
-
-
-
-///////// Require 2 /////////// Require 2 ///////// Require 2 //////////// Require 2 ////////////
-
-class Require2 {
-    var  T: Int32 =  Int32(arc4random_uniform(27) + 69)
-    
-    func GetR() -> Int32 {
-        let  R: Int32 = T % 5
-        return R
-    }
+class Cube: Shape3D{
+    var edge: Double
+    init(edge: Double){
+            self.edge = edge
+        }
+        override  func volume() -> Double {
+            return edge * edge * edge
+        }
+        override  func area() -> Double { // diện tích bề mặt hình lập phương
+            return 6 * edge * edge
+        }
 }
 
+
+
+
+class RandomCreateShapes {
+    var  intT: Int32 =  Int32(arc4random_uniform(27) + 69) // số nguyên T bất kỳ từ 69 - 96
+    
+    func SurPlusR() -> Int32 {
+        let  surPlusR: Int32 = intT % 5                   // R số dư của T chia 5
+        return surPlusR
+        
+    }
+    
+    var listShapes: Array<Int> = Array()
+}
 
 
