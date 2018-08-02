@@ -4,8 +4,6 @@
 //
 //  Created by WITZ on 7/23/18.
 //  Copyright © 2018 WITZ. All rights reserved.
-//
-
 import Foundation
 
 let pi = 3.14  // hằng số pi khai báo toàn cục
@@ -36,6 +34,7 @@ class Shape3D: Shape {
     func volume() -> Double { //thể tích của hình 3 chiều
         return 0.0
     }
+    
 }
 
 
@@ -53,6 +52,7 @@ class Circle: Shape2D {
             return pi * radius * radius
         }
 }
+//let setCirrcle = Circle(radius: 3.0)
 
 
 class Square: Shape2D{
@@ -81,12 +81,12 @@ class Triangle: Shape2D{
         self.edgeB = edgeB
         self.edgeC = edgeC
     }
+    
     override func perimeter() -> Double {
         if edgeA + edgeB > edgeC && edgeC + edgeB > edgeA && edgeC + edgeA > edgeB {
             return edgeC + edgeB + edgeA
         }
         else{
-            print("khong phai 3 canh cua 1 tam giac")
             return 0.0
         }
     }
@@ -133,21 +133,28 @@ class Cube: Shape3D{
 
 class RandomCreateShapes {
     
-    var  intT: Int32 =  Int32(arc4random_uniform(27) + 69) // số nguyên T bất kỳ từ 69 - 96
+    var intT: Int32 =  Int32(arc4random_uniform(27) + 69) // số nguyên T bất kỳ từ 69...96
+    var InputValueForShapes: Double = Double(arc4random_uniform(99) + 1) //giá trị nhâp vào ngẫu nhiên 1...100 của các loại hình
+    
+    func GetR() -> Int32 {
+        let  surPlusR: Int32 = intT % 5
+        return surPlusR
+    }
     
     func AddShapesToList()  {
         var listShapes = [Any]()  // mảng danh sách chứa các loại hình
-        
-        let  surPlusR: Int32 = intT % 5                   // R số dư khi T chia 5
-        
-        if (surPlusR == 0){
-            
+        let n = 1
+        while n <= 20 {
+    
+            switch GetR() < 5 {
+                case GetR() == 0 : listShapes.append(Circle(radius: InputValueForShapes))
+                case GetR() == 1 : listShapes.append(Square(edge: InputValueForShapes))
+                case GetR() == 2 : listShapes.append(Triangle(edgeA: InputValueForShapes, edgeB: InputValueForShapes, edgeC: InputValueForShapes))
+                case GetR() == 3 : listShapes.append(Globular(radius: InputValueForShapes))
+                case GetR() == 4 : listShapes.append(Cube(edge: InputValueForShapes))
+                    default: print("Drink Beer affter that go to Sleep")
+            }
         }
-        if (surPlusR == 1){
-            
-        }
-        
-        }
+    }
 }
-
 
