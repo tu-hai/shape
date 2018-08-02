@@ -169,20 +169,13 @@ setCube.display()
 ///////// Require 2 /////////// Require 2 ///////// Require 2 //////////// Require 2 ////////////
 
 class Require2 {
-
-    func GetT() -> Int32 {
-        var  T: Int32 =  Int32(arc4random_uniform(27) + 69)
-        return T
-    }
+    var  T: Int32 =  Int32(arc4random_uniform(27) + 69)
+    
     func GetR() -> Int32 {
         let  R: Int32 = T % 5
         return R
     }
-    func display() {
-        print(T)
-        print(R)
-    }
 }
-let setRequire2 = Require2()
-setCube.display()
+
+
 
