@@ -137,17 +137,20 @@ class RandomCreateShapes {
         var n = 1
  
         while n <= 20 {
-            enum SetRForShapes: Double {
-                case Circle
-                case Square
-                case Cube
+            enum SetRForShapes: Double { //
+                case Circle   = 0
+                case Square   = 1
+                case Triangle = 2
+                case Globular = 3
+                case Cube     = 4
             }
+            
             switch getR() < 5 {
-                case getR() == 0 : listShapes.append(Circle(radius: InputValueForShapes))
-                case getR() == 1 : listShapes.append(Square(edge: InputValueForShapes))
-                case getR() == 2 : listShapes.append(Triangle(edgeA: InputValueForShapes, edgeB: InputValueForShapes, edgeC: InputValueForShapes))
-                case getR() == 3 : listShapes.append(Globular(radius: InputValueForShapes))
-                case getR() == 4 : listShapes.append(Cube(edge: InputValueForShapes))
+            case getR() == Int32(SetRForShapes.Circle.rawValue) : listShapes.append(Circle(radius: InputValueForShapes))
+            case getR() == Int32(SetRForShapes.Square.rawValue) : listShapes.append(Square(edge: InputValueForShapes))
+            case getR() == Int32(SetRForShapes.Triangle.rawValue) : listShapes.append(Triangle(edgeA: InputValueForShapes, edgeB: InputValueForShapes, edgeC:           InputValueForShapes))
+            case getR() == Int32(SetRForShapes.Globular.rawValue) : listShapes.append(Globular(radius: InputValueForShapes))
+            case getR() == Int32(SetRForShapes.Cube.rawValue) : listShapes.append(Cube(edge: InputValueForShapes))
                 default: print("")
             }
             n += 1
