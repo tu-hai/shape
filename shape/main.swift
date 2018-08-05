@@ -68,11 +68,16 @@ class Triangle: Shape2D {
     var edgeC: Double
     
     init?(edgeA: Double, edgeB: Double, edgeC: Double) {
-        guard Triangle.isValidParameters(edgeA: edgeA, edgeB: edgeB, edgeC: edgeC) else { return nil }
+        guard Triangle.isValidEdge(edgeA: edgeA, edgeB: edgeB, edgeC: edgeC) else { return nil }
         
         self.edgeA = edgeA
         self.edgeB = edgeB
         self.edgeC = edgeC
+    }
+    
+    static func isValidEdge(edgeA: Double, edgeB: Double, edgeC: Double) -> Bool {
+        edgeC + edgeB > edgeA && edgeA + edgeB > edgeC && edgeA + edgeC > edgeB
+        return true
     }
     
     override func perimeter() -> Double {
@@ -85,12 +90,6 @@ class Triangle: Shape2D {
         
         return sqrt(halfPerimeter * (halfPerimeter - edgeA) * (halfPerimeter - edgeB) * (halfPerimeter - edgeC))
         // công thức heron dùng 1 nữa chu vi và 3 cạnh để tính S tam giác
-    }
-    
-    static func isValidParameters(edgeA: Double, edgeB: Double, edgeC: Double) -> Bool {
-        // Check valid
-        
-        return true
     }
 }
 
