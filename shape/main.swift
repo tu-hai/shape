@@ -60,14 +60,14 @@ class Triangle: Shape2D {
     var edgeC: Double
     
     init?(edgeA: Double, edgeB: Double, edgeC: Double) {
-        guard Triangle.isValidParameters(edgeA: edgeA, edgeB: edgeB, edgeC: edgeC) else { return nil }
+        guard Triangle.isValidTriangle(edgeA: edgeA, edgeB: edgeB, edgeC: edgeC) else { return nil }
         
         self.edgeA = edgeA
         self.edgeB = edgeB
         self.edgeC = edgeC
     }
     
-    static func isValidParameters(edgeA: Double, edgeB: Double, edgeC: Double) -> Bool {
+    static func isValidTriangle(edgeA: Double, edgeB: Double, edgeC: Double) -> Bool {
         return edgeC + edgeB > edgeA && edgeA + edgeB > edgeC && edgeA + edgeC > edgeB
     }
     
@@ -121,7 +121,7 @@ enum ShapesType: Int {
 
 
 class RandomCreateShapes {
-    var InputValueForShapes: Double = Double(arc4random_uniform(99) + 1) //giá trị nhâp vào ngẫu nhiên 1...100 của các loại hình
+    var inputValueForShapes: Double = Double(arc4random_uniform(99) + 1) //giá trị nhâp vào ngẫu nhiên 1...100 của các loại hình
     var listShapes: [Shape] = []  // mảng danh sách chứa các loại hình
     var count = 0
     
@@ -130,26 +130,33 @@ class RandomCreateShapes {
         let number: Int = randomNumber % 5
         return ShapesType(rawValue: number)
     }
+   
+    public func invalidInputForShapes() {
+        let invalidInput = Int (inputValueForShapes.truncatingRemainder(dividingBy: 6.0))
+        // )))
+    }
+    
+    
     
     func addShapeToList()  {
-        while (count < 20){
+        repeat {
             guard let randomShapeType = getShapesType() else { return }
             switch randomShapeType {
             case .circle:
-                listShapes.append(Circle(radius: InputValueForShapes))
+                listShapes.append(Circle(radius: inputValueForShapes))
             case .square:
-                listShapes.append(Square(edge: InputValueForShapes))
+                listShapes.append(Square(edge: inputValueForShapes))
             case .globular:
-                listShapes.append(Globular(radius: InputValueForShapes))
+                listShapes.append(Globular(radius: inputValueForShapes))
             case .cube:
-                listShapes.append(Cube(edge: InputValueForShapes))
+                listShapes.append(Cube(edge: inputValueForShapes))
             case .triangle:
-                if let triangle = Triangle(edgeA: InputValueForShapes, edgeB: InputValueForShapes, edgeC: InputValueForShapes) {
+                if let triangle = Triangle(edgeA: inputValueForShapes, edgeB: inputValueForShapes, edgeC: inputValueForShapes) {
                     listShapes.append(triangle)
                 }
             }
             count += 1
-        }
+        } while count < 20 && inputValueForShapes > 10 //&& invalidInput % 6
     }
 
     
@@ -162,29 +169,29 @@ class RandomCreateShapes {
         
         for index in 0..<listShapes.count {
             let shape: Shape = listShapes[index]
-            
+
             if let circle = shape as? Circle {
                 circles.append(circle)
             }
-            
+
             if let triangle = shape as? Triangle{
                 triangles.append(triangle)
             }
-            
+
             if let square = shape as? Square {
                 squares.append(square)
             }
-            
+
             if let globular = shape as? Globular{
                 globulars.append(globular)
             }
-            
+
             if let cube = shape as? Cube {
                 cubes.append(cube)
             }
         }
         
-        
+
         var totalVolumeCubes       = 0.0
         var totalAreaCubes         = 0.0
         
@@ -197,7 +204,7 @@ class RandomCreateShapes {
         var totalPrimeterTriangles = 0.0
         var totalAreaTriangles     = 0.0
         
-        var totalPrimeterGlobulars = 0.0
+        var totalVolumeGlobulars = 0.0
         var totalAreaGlobulars     = 0.0
         
         
@@ -221,16 +228,15 @@ class RandomCreateShapes {
         
         for index in 0..<globulars.count{
             let globular       = globulars[index]
-            totalPrimeterGlobulars = totalPrimeterGlobulars + globular.volume()
+            totalVolumeGlobulars = totalVolumeGlobulars + globular.volume()
             totalAreaGlobulars = totalAreaGlobulars + globular.area()
         }
         
         for index in 0..<triangles.count{
             let triangle           = triangles[index]
-            totalPrimeterTriangles = totalPrimeterTriangles + triangle.perimeter()
+            totalPrimeterTriangles = totalVolumeGlobulars + triangle.perimeter()
             totalAreaTriangles     = totalAreaTriangles + triangle.area()
         }
-        
         
         print("total of circles: \(circles.count)")
         print("total of trangles: \(triangles.count)")
@@ -242,7 +248,7 @@ class RandomCreateShapes {
         print("\nthe total volumes of cube: \(totalVolumeCubes)")
         print("the total areas of cube: \(totalVolumeCubes)")
         
-        print("\nthe total volumes of globulars: \(totalPrimeterGlobulars)")
+        print("\nthe total volumes of globulars: \(totalVolumeGlobulars)")
         print("the total areas of cube: \(totalAreaGlobulars)")
         
         print("\nthe total primeter of circles: \(totalPrimeterCircles)")
@@ -255,8 +261,6 @@ class RandomCreateShapes {
         print("the total areas of triangles: \(totalAreaTriangles)\n")
         
     }
-    
-    
 }
 
 let randomCreateShapes = RandomCreateShapes()
